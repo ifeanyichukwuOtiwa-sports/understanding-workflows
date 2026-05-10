@@ -9,7 +9,7 @@ on:
 jobs:
   my_self_hosted_job:
     name: my self hosted job
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - id: selfHostedId
         name: Step in a Self hosted runner
