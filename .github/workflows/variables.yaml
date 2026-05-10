@@ -30,7 +30,7 @@ jobs:
         if: contains(env.aString,'this')
         run: |
           echo "our string var contains the word this"
-          echo "but here is a typo that will make this step fail"
+          echos "but here is a typo that will make this step fail"
 
       - id: testStatus
         name: test status check and format function
