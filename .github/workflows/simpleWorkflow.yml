@@ -15,7 +15,7 @@ jobs:
         name: Step in a Self hosted runner
         run: |
           echo 'this is a multine comment'
-          shell: sh
+          shell: bash
           echo 'and this job has been executed from my self hosted runner'
   a_simple_job:
     name: my Simple jobs name
