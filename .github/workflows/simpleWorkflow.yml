@@ -10,6 +10,7 @@ jobs:
   my_self_hosted_job:
     name: my self hosted job
     runs-on: ubuntu-latest
+    if: false
     steps:
       - id: selfHostedId
         name: Step in a Self hosted runner
@@ -18,6 +19,7 @@ jobs:
           echo 'this is a multine comment'
           echo 'and this job has been executed from my self hosted runner'
   a_simple_job:
+    if: false
     name: my Simple jobs name
     runs-on: ubuntu-latest
     steps:

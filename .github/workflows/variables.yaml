@@ -7,7 +7,60 @@ env:
   WF_VAR: 'Workflow Level Variable'
 
 jobs:
+  test_expressions:
+    runs-on: ubuntu-latest
+    env:
+      aBoolean: true
+      aNull: ${{ null }}
+      aString: this is a string
+      aNumber: 42
+    steps:
+      - id: testNull
+        name: test null
+        if: (env.aNull == null)
+        run: echo this variable is Null
+
+      - id: testBoolean
+        name: test boolean
+        if: env.aBoolean == true
+        run: echo this variable is true
+
+      - id: testString
+        name: contains function
+        if: contains(env.aString,'this')
+        run: |
+          echo "our string var contains the word this"
+          echo "but here is a typo that will make this step fail"
+
+      - id: testStatus
+        name: test status check and format function
+        if: failure()
+        env:
+          FORMAT_VAR: ${{ format('Github {0} {1} {2}','actions', 'is', 'awesome!') }}
+        run: |
+          echo "this step runs a special script to clean up after failed step"
+          echo ${{ env.FORMAT_VAR }}
+
+      - id: testAlwaysFunction
+        name: function and always() status check
+        if: ${{ startsWith(env.aString, 'this') && always() }}
+        env:
+          ALWAYS_VAR: ${{ format('Always {0} {1} {2}','runs', 'is', 'awesome!') }}
+        run: |
+          echo "this step runs a special script to clean up after failed step"
+          echo ${{ env.ALWAYS_VAR }}
+          sleep 60
+      - name: test cancel status check
+        if: ${{ cancelled() }}
+        run: echo "This job runs if a workflow is cancelled, it can also be used for clean up scripts"
+
+      - id: testNumber
+        name: test number
+        if: env.aNumber == 42
+        run: echo this variable is 42
+
   test_variables:
+    if: github.event_name == 'pull_request'
     name: Job to test Variables
     runs-on: ubuntu-latest
     env:
@@ -25,3 +78,4 @@ jobs:
           echo $STEP_VAR
           echo ${{ vars.CONF_VAR }}
           echo ${{ secrets.A_SECRET }}
+          echo ${{ format('Hello {0}, welcome to {1}', github.actor, github.repository) }}
