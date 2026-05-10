@@ -19,7 +19,7 @@ jobs:
           STEP_VAR: 'Step level Variable'
         run: |
           echo ${{ github.actor }}
-          echo $GITHUB_JOB'
+          echo $GITHUB_JOB
           echo $WF_VAR
           echo $JOB_VAR
           echo $STEP_VAR
