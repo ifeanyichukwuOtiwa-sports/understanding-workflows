@@ -13,9 +13,9 @@ jobs:
     steps:
       - id: selfHostedId
         name: Step in a Self hosted runner
+        shell: sh
         run: |
           echo 'this is a multine comment'
-          shell: bash
           echo 'and this job has been executed from my self hosted runner'
   a_simple_job:
     name: my Simple jobs name
