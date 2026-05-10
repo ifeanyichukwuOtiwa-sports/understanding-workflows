@@ -1,9 +1,22 @@
 name: Workflow Overview
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+  push:
+    branches:
+      - develop
 
 jobs:
+  my_self_hosted_job:
+    name: my self hosted job
+    runs-on: self-hosted
+    steps:
+      - id: selfHostedId
+        name: Step in a Self hosted runner
+        run: |
+          echo 'this is a multine comment'
+          shell: sh
+          echo 'and this job has been executed from my self hosted runner'
   a_simple_job:
     name: my Simple jobs name
     runs-on: ubuntu-latest
