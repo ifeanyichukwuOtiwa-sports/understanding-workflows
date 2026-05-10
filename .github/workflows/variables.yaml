@@ -22,7 +22,7 @@ jobs:
 
       - id: testBoolean
         name: test boolean
-        if: env.aBoolean == true
+        if: fromJSON(env.aBoolean)
         run: echo this variable is true
 
       - id: testString
